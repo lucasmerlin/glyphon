@@ -95,32 +95,35 @@ async fn run() {
                         window.request_redraw();
                     }
                     WindowEvent::RedrawRequested => {
-                        text_renderer
-                            .prepare(
-                                &device,
-                                &queue,
-                                &mut font_system,
-                                &mut atlas,
-                                Resolution {
-                                    width: config.width,
-                                    height: config.height,
-                                },
-                                [TextArea {
-                                    buffer: &buffer,
-                                    left: 10.0,
-                                    top: 10.0,
-                                    scale: 1.0,
-                                    bounds: TextBounds {
-                                        left: 0,
-                                        top: 0,
-                                        right: 600,
-                                        bottom: 160,
-                                    },
-                                    default_color: Color::rgb(255, 255, 255),
-                                }],
-                                &mut cache,
-                            )
-                            .unwrap();
+                text_renderer
+                    .prepare(
+                        &device,
+                        &queue,
+                        &mut font_system,
+                        &mut atlas,
+                        Resolution {
+                            width: config.width,
+                            height: config.height,
+                        },
+                        [TextArea {
+                            buffer: &buffer,
+                            left: 10.0,
+                            top: 10.0,
+                            scale: 1.0,
+                            bounds: TextBounds {
+                                left: 0,
+                                top: 0,
+                                right: 600,
+                                bottom: 160,
+                            },
+                            default_color: Color::rgb(255, 255, 255),
+                            // transform: glyphon::Mat3::IDENTITY,
+                            transform: glyphon::Mat3::from_angle(0.5)
+                                * glyphon::Mat3::from_translation(glam::Vec2::new(200.0, 20.0)),
+                        }],
+                        &mut cache,
+                    )
+                    .unwrap();
 
                         let frame = surface.get_current_texture().unwrap();
                         let view = frame.texture.create_view(&TextureViewDescriptor::default());
