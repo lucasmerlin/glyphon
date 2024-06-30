@@ -9,12 +9,12 @@ use wgpu::{
     BindGroup, BindGroupDescriptor, BindGroupEntry, BindGroupLayout, BindGroupLayoutEntry,
     BindingResource, BindingType, BlendState, Buffer, BufferBindingType, BufferDescriptor,
     BufferUsages, ColorTargetState, ColorWrites, DepthStencilState, Device, Extent3d, FilterMode,
-    FragmentState, ImageCopyTexture, ImageDataLayout, MultisampleState, Origin3d, PipelineLayout,
-    PipelineLayoutDescriptor, PrimitiveState, Queue, RenderPipeline, RenderPipelineDescriptor,
-    Sampler, SamplerBindingType, SamplerDescriptor, ShaderModule, ShaderModuleDescriptor,
-    ShaderSource, ShaderStages, Texture, TextureAspect, TextureDescriptor, TextureDimension,
-    TextureFormat, TextureSampleType, TextureUsages, TextureView, TextureViewDescriptor,
-    TextureViewDimension, VertexFormat, VertexState,
+    FragmentState, ImageCopyTexture, ImageDataLayout, MultisampleState, Origin3d,
+    PipelineCompilationOptions, PipelineLayout, PipelineLayoutDescriptor, PrimitiveState, Queue,
+    RenderPipeline, RenderPipelineDescriptor, Sampler, SamplerBindingType, SamplerDescriptor,
+    ShaderModule, ShaderModuleDescriptor, ShaderSource, ShaderStages, Texture, TextureAspect,
+    TextureDescriptor, TextureDimension, TextureFormat, TextureSampleType, TextureUsages,
+    TextureView, TextureViewDescriptor, TextureViewDimension, VertexFormat, VertexState,
 };
 
 #[allow(dead_code)]
@@ -507,6 +507,7 @@ impl TextAtlas {
                         module: &self.shader,
                         entry_point: "vs_main",
                         buffers: &self.vertex_buffers,
+                        compilation_options: PipelineCompilationOptions::default(),
                     },
                     fragment: Some(FragmentState {
                         module: &self.shader,
@@ -516,6 +517,7 @@ impl TextAtlas {
                             blend: Some(BlendState::ALPHA_BLENDING),
                             write_mask: ColorWrites::default(),
                         })],
+                        compilation_options: PipelineCompilationOptions::default(),
                     }),
                     primitive: PrimitiveState::default(),
                     depth_stencil: depth_stencil.clone(),
