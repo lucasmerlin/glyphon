@@ -523,6 +523,7 @@ impl TextAtlas {
                     depth_stencil: depth_stencil.clone(),
                     multisample,
                     multiview: None,
+                    cache: None,
                 }));
 
                 self.cached_pipelines
