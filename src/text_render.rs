@@ -414,10 +414,10 @@ impl TextRenderer {
     }
 
     /// Renders all layouts that were previously provided to `prepare`.
-    pub fn render<'pass>(
-        &'pass self,
-        atlas: &'pass TextAtlas,
-        pass: &mut RenderPass<'pass>,
+    pub fn render(
+        &self,
+        atlas: &TextAtlas,
+        pass: &mut RenderPass<'static>,
     ) -> Result<(), RenderError> {
         if self.vertices_to_render == 0 {
             return Ok(());
