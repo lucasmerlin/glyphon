@@ -141,7 +141,7 @@ async fn run() {
                                 depth_stencil_attachment: None,
                                 timestamp_writes: None,
                                 occlusion_query_set: None,
-                            });
+                            }).forget_lifetime();
 
                             text_renderer.render(&atlas, &mut pass).unwrap();
                         }

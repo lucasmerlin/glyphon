@@ -431,7 +431,7 @@ impl TextRenderer {
         }
 
         pass.set_pipeline(&self.pipeline);
-        pass.set_bind_group(0, &atlas.bind_group, &[]);
+        pass.set_bind_group(0, &*atlas.bind_group, &[]);
         pass.set_vertex_buffer(0, self.vertex_buffer.slice(..));
         pass.set_index_buffer(self.index_buffer.slice(..), IndexFormat::Uint32);
         pass.draw_indexed(0..self.vertices_to_render, 0, 0..1);

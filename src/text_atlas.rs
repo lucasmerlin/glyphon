@@ -505,13 +505,13 @@ impl TextAtlas {
                     layout: Some(&self.pipeline_layout),
                     vertex: VertexState {
                         module: &self.shader,
-                        entry_point: "vs_main",
+                        entry_point: Some("vs_main"),
                         buffers: &self.vertex_buffers,
                         compilation_options: PipelineCompilationOptions::default(),
                     },
                     fragment: Some(FragmentState {
                         module: &self.shader,
-                        entry_point: "fs_main",
+                        entry_point: Some("fs_main"),
                         targets: &[Some(ColorTargetState {
                             format: self.format,
                             blend: Some(BlendState::ALPHA_BLENDING),
