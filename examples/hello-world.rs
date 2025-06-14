@@ -4,12 +4,7 @@ use glyphon::{
     Attrs, Buffer, Color, Family, FontSystem, Metrics, Resolution, Shaping, SwashCache, TextArea,
     TextAtlas, TextBounds, TextRenderer,
 };
-use wgpu::{
-    CommandEncoderDescriptor, CompositeAlphaMode, DeviceDescriptor, Features, Instance,
-    InstanceDescriptor, Limits, LoadOp, MemoryHints, MultisampleState, Operations, PresentMode,
-    RenderPassColorAttachment, RenderPassDescriptor, RequestAdapterOptions, SurfaceConfiguration,
-    TextureFormat, TextureUsages, TextureViewDescriptor,
-};
+use wgpu::{CommandEncoderDescriptor, CompositeAlphaMode, DeviceDescriptor, Features, Instance, InstanceDescriptor, Limits, LoadOp, MemoryHints, MultisampleState, Operations, PresentMode, RenderPassColorAttachment, RenderPassDescriptor, RequestAdapterOptions, SurfaceConfiguration, TextureFormat, TextureUsages, TextureViewDescriptor, Trace};
 use winit::{
     dpi::LogicalSize,
     event::{Event, WindowEvent},
@@ -50,8 +45,8 @@ async fn run() {
                 required_features: Features::empty(),
                 required_limits: Limits::downlevel_defaults(),
                 memory_hints: MemoryHints::Performance,
+                trace: Trace::Off,
             },
-            None,
         )
         .await
         .unwrap();
