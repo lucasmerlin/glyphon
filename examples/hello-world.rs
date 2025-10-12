@@ -44,6 +44,7 @@ async fn run() {
                 label: None,
                 required_features: Features::empty(),
                 required_limits: Limits::downlevel_defaults(),
+                experimental_features: Default::default(),
                 memory_hints: MemoryHints::Performance,
                 trace: Trace::Off,
             },
@@ -141,6 +142,7 @@ async fn run() {
                                     label: None,
                                     color_attachments: &[Some(RenderPassColorAttachment {
                                         view: &view,
+                                        depth_slice: None,
                                         resolve_target: None,
                                         ops: Operations {
                                             load: LoadOp::Clear(wgpu::Color::BLACK),

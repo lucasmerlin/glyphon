@@ -5,17 +5,7 @@ use crate::{
 use etagere::{size2, Allocation, BucketedAtlasAllocator};
 use lru::LruCache;
 use std::{borrow::Cow, collections::HashSet, mem::size_of, num::NonZeroU64, sync::Arc};
-use wgpu::{
-    BindGroup, BindGroupDescriptor, BindGroupEntry, BindGroupLayout, BindGroupLayoutEntry,
-    BindingResource, BindingType, BlendState, Buffer, BufferBindingType, BufferDescriptor,
-    BufferUsages, ColorTargetState, ColorWrites, DepthStencilState, Device, Extent3d, FilterMode,
-    FragmentState, ImageCopyTexture, ImageDataLayout, MultisampleState, Origin3d,
-    PipelineCompilationOptions, PipelineLayout, PipelineLayoutDescriptor, PrimitiveState, Queue,
-    RenderPipeline, RenderPipelineDescriptor, Sampler, SamplerBindingType, SamplerDescriptor,
-    ShaderModule, ShaderModuleDescriptor, ShaderSource, ShaderStages, Texture, TextureAspect,
-    TextureDescriptor, TextureDimension, TextureFormat, TextureSampleType, TextureUsages,
-    TextureView, TextureViewDescriptor, TextureViewDimension, VertexFormat, VertexState,
-};
+use wgpu::{BindGroup, BindGroupDescriptor, BindGroupEntry, BindGroupLayout, BindGroupLayoutEntry, BindingResource, BindingType, BlendState, Buffer, BufferBindingType, BufferDescriptor, BufferUsages, ColorTargetState, ColorWrites, DepthStencilState, Device, Extent3d, FilterMode, FragmentState, MultisampleState, Origin3d, PipelineCompilationOptions, PipelineLayout, PipelineLayoutDescriptor, PrimitiveState, Queue, RenderPipeline, RenderPipelineDescriptor, Sampler, SamplerBindingType, SamplerDescriptor, ShaderModule, ShaderModuleDescriptor, ShaderSource, ShaderStages, TexelCopyBufferLayout, TexelCopyTextureInfo, Texture, TextureAspect, TextureDescriptor, TextureDimension, TextureFormat, TextureSampleType, TextureUsages, TextureView, TextureViewDescriptor, TextureViewDimension, VertexFormat, VertexState};
 
 #[allow(dead_code)]
 pub(crate) struct InnerAtlas {
@@ -167,7 +157,7 @@ impl InnerAtlas {
             let height = image.placement.height as usize;
 
             queue.write_texture(
-                ImageCopyTexture {
+                TexelCopyTextureInfo {
                     texture: &self.texture,
                     mip_level: 0,
                     origin: Origin3d {
@@ -178,7 +168,7 @@ impl InnerAtlas {
                     aspect: TextureAspect::All,
                 },
                 &image.data,
-                ImageDataLayout {
+                TexelCopyBufferLayout {
                     offset: 0,
                     bytes_per_row: Some(width as u32 * self.kind.num_channels() as u32),
                     rows_per_image: None,
